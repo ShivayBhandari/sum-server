@@ -82,7 +82,58 @@ app.get("/notifications", (req, res) => {
     messaging: getRandomNumber(10),
     notifications: getRandomNumber(10)
   })
-
 })
 
-app.listen(8080)
+// New route to serve the HTML message
+app.get("/message", (req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/html');
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Message for Shreya</title>
+      <style>
+        body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          font-family: Arial, sans-serif;
+          background: linear-gradient(to right, #ff7e5f, #feb47b);
+        }
+        .message-box {
+          text-align: center;
+          background: rgba(255, 255, 255, 0.8);
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .message-box h1 {
+          margin: 0;
+          font-size: 2.5em;
+          color: #333;
+        }
+        .message-box p {
+          margin: 10px 0 0;
+          font-size: 1.2em;
+          color: #555;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="message-box">
+        <h1>Good morning Shreya,</h1>
+        <p>I love you.</p>
+      </div>
+    </body>
+    </html>
+  `);
+});
+
+app.listen(8080, () => {
+  console.log('Server running at http://0.0.0.0:8080/');
+});
