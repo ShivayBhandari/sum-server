@@ -122,18 +122,63 @@ app.get("/message", (req, res) => {
           font-size: 1.2em;
           color: #555;
         }
+        .message-box button {
+          margin-top: 20px;
+          padding: 10px 20px;
+          font-size: 1em;
+          color: #fff;
+          background-color: #ff7e5f;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+        .message-box button:hover {
+          background-color: #feb47b;
+        }
+        @media (max-width: 600px) {
+          .message-box {
+            width: 90%;
+            padding: 10px;
+          }
+          .message-box h1 {
+            font-size: 2em;
+          }
+          .message-box p {
+            font-size: 1em;
+          }
+          .message-box button {
+            font-size: 0.8em;
+            padding: 8px 16px;
+          }
+        }
       </style>
     </head>
     <body>
       <div class="message-box">
         <h1>Good morning Shreya,</h1>
         <p>I love you.</p>
+        <button onclick="changeMessage()">Click me!</button>
       </div>
+      <script>
+        function changeMessage() {
+          const messages = [
+            "Good morning Shreya, I love you.",
+            "Have a great day, Shreya!",
+            "You are amazing, Shreya!",
+            "Keep smiling, Shreya!",
+            "You are loved, Shreya!"
+          ];
+          const randomIndex = Math.floor(Math.random() * messages.length);
+          document.querySelector('.message-box p').innerText = messages[randomIndex];
+        }
+      </script>
     </body>
     </html>
   `);
 });
 
-app.listen(8080, () => {
-  console.log('Server running at http://0.0.0.0:8080/');
+const PORT = 8080;
+app.listen(PORT, () => {
+  console.log(`Server running at http://0.0.0.0:${PORT}/`);
 });
